@@ -1,0 +1,149 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid transparent;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.cardLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.cardValue {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card.total {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.card.total .cardLabel {
+  color: #1e40af;
+}
+
+.card.total .cardValue {
+  color: #1e40af;
+}
+
+.card.active {
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+
+.card.active .cardLabel {
+  color: #92400e;
+}
+
+.card.active .cardValue {
+  color: #92400e;
+}
+
+.card.completed {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.card.completed .cardLabel {
+  color: #065f46;
+}
+
+.card.completed .cardValue {
+  color: #065f46;
+}
+
+.card.overdue {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.card.overdue .cardLabel {
+  color: #991b1b;
+}
+
+.card.overdue .cardValue {
+  color: #991b1b;
+}
+
+.card.rate {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+}
+
+.card.rate .cardLabel {
+  color: #374151;
+}
+
+.card.rate .cardValue {
+  color: #374151;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.chartContainer {
+  min-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .panel {
+    padding: 16px;
+  }
+
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardValue {
+    font-size: 24px;
+  }
+}

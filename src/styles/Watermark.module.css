@@ -1,0 +1,23 @@
+.watermark {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0.5rem;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 0.875rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .watermark {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+  }
+}

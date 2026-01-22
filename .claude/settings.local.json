@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash:*)",
+      "Bash(if:*)",
+      "Bash(then ls -la \"specs/001-todo-app/checklists\")",
+      "Bash(else echo \"No checklists directory found\")",
+      "Bash(fi:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(npm create vite@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Bash(npm run test:*)",
+      "Bash(cat:*)",
+      "Bash(npm test:*)",
+      "Bash(git add:*)",
+      "Bash(del:*)"
+    ]
+  }
+}

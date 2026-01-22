@@ -1,0 +1,107 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  transition: box-shadow 0.2s, transform 0.1s;
+  gap: 0.75rem;
+}
+
+.item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: #4caf50;
+}
+
+.checkbox:focus {
+  outline: 2px solid #4caf50;
+  outline-offset: 2px;
+}
+
+/* Focus-visible for keyboard navigation */
+.checkbox:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid #4caf50;
+  outline-offset: 2px;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.item:hover .deleteButton {
+  opacity: 1;
+}
+
+.deleteButton:hover {
+  transform: scale(1.15);
+}
+
+.deleteButton:focus {
+  opacity: 1;
+  outline: 2px solid #ff5252;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.deleteButton:active {
+  transform: scale(0.95);
+}
+
+@media (hover: none) {
+  .deleteButton {
+    opacity: 1;
+  }
+}
+
+.text {
+  flex: 1;
+  font-size: 1rem;
+  color: #333;
+  word-break: break-word;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.item.completed .text {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.item.completed {
+  opacity: 0.7;
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  .item {
+    padding: 0.75rem;
+  }
+
+  .checkbox {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .text {
+    font-size: 0.95rem;
+  }
+}

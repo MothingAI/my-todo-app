@@ -1,0 +1,187 @@
+.form {
+  margin-bottom: 2rem;
+}
+
+.mainInput {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.inputWrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.input:focus {
+  border-color: #667eea;
+  box-shadow:
+    0 0 0 4px rgba(102, 126, 234, 0.1),
+    0 4px 16px rgba(102, 126, 234, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.counter {
+  position: absolute;
+  right: 0.875rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+.counterWarning {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.addButton {
+  padding: 0 1.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 16px rgba(102, 126, 234, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.addButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(102, 126, 234, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.addButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.addButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.advancedButton {
+  padding: 0 0.875rem;
+  font-size: 1.25rem;
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.advancedButton:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #667eea;
+  color: #4b5563;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.advancedOptions {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.fieldGroup:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: 0.025em;
+}
+
+.dateInput,
+.numberInput,
+.selectInput {
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-radius: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dateInput:focus,
+.numberInput:focus,
+.selectInput:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+@media (max-width: 600px) {
+  .mainInput {
+    flex-wrap: wrap;
+  }
+
+  .addButton {
+    flex: 1;
+    padding: 0.75rem;
+  }
+
+  .advancedButton {
+    padding: 0.75rem;
+  }
+
+  .advancedOptions {
+    padding: 0.75rem;
+  }
+}

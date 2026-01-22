@@ -1,0 +1,25 @@
+.chart {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.title {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.axisLabel {
+  font-size: 12px;
+  fill: #6b7280;
+}
+
+.variance {
+  margin: 16px 0 0 0;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+}

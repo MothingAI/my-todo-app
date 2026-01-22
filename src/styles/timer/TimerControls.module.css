@@ -1,0 +1,66 @@
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.button {
+  flex: 1;
+  max-width: 200px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pauseButton {
+  background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+  box-shadow: 0 4px 16px rgba(255, 152, 0, 0.3);
+}
+
+.pauseButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 152, 0, 0.4);
+}
+
+.resumeButton {
+  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
+}
+
+.resumeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.4);
+}
+
+.stopButton {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+  box-shadow: 0 4px 16px rgba(244, 67, 54, 0.3);
+}
+
+.stopButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(244, 67, 54, 0.4);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+  }
+
+  .button {
+    max-width: none;
+  }
+}
