@@ -39,9 +39,7 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# 插件配置（可选）
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-  [plugins.inputs]
-    # 只在生产环境运行 Lighthouse 测试
-    minimal_mode = true
+# 注意：Lighthouse 插件已移除，避免配置错误
+# 如需性能测试，可以手动使用 Chrome DevTools 的 Lighthouse
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
