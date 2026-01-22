@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
 import styles from '../styles/Navigation.module.css'
 
@@ -8,7 +9,7 @@ interface NavigationProps {
   onViewChange: (view: ViewMode) => void
 }
 
-export function Navigation({ currentView, onViewChange }: NavigationProps) {
+export const Navigation = memo(function Navigation({ currentView, onViewChange }: NavigationProps) {
   const { t } = useLanguage()
 
   return (
@@ -42,4 +43,4 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
       </button>
     </nav>
   )
-}
+})

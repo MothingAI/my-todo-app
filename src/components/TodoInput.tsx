@@ -1,8 +1,8 @@
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, memo } from 'react'
 import { useTodos } from '../hooks/useTodos'
 import styles from '../styles/TodoInput.module.css'
 
-export function TodoInput() {
+export const TodoInput = memo(function TodoInput() {
   const [description, setDescription] = useState('')
   const { dispatch } = useTodos()
 
@@ -63,4 +63,4 @@ export function TodoInput() {
       </button>
     </form>
   )
-}
+})

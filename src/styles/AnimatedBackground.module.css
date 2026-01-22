@@ -9,56 +9,46 @@
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 50%, #f5f7fa 100%);
 }
 
-/* Animated gradient orbs */
+/* Animated gradient orbs - 优化性能：减少模糊和数量 */
 .orb1,
 .orb2,
-.orb3,
-.orb4 {
+.orb3 {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.6;
+  filter: blur(60px);
+  opacity: 0.5;
   animation: float 20s ease-in-out infinite;
+  will-change: transform;
 }
 
 .orb1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%);
-  top: -250px;
-  left: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.35) 0%, rgba(102, 126, 234, 0) 70%);
+  top: -200px;
+  left: -100px;
   animation-delay: 0s;
   animation-duration: 25s;
 }
 
 .orb2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0) 70%);
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(118, 75, 162, 0.3) 0%, rgba(118, 75, 162, 0) 70%);
   top: 20%;
-  right: -100px;
-  animation-delay: -5s;
+  right: -80px;
+  animation-delay: -8s;
   animation-duration: 30s;
 }
 
 .orb3 {
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0) 70%);
-  bottom: -200px;
-  left: 30%;
-  animation-delay: -10s;
-  animation-duration: 28s;
-}
-
-.orb4 {
   width: 380px;
   height: 380px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0) 70%);
-  bottom: 10%;
-  right: -100px;
-  animation-delay: -15s;
-  animation-duration: 32s;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0) 70%);
+  bottom: -150px;
+  left: 30%;
+  animation-delay: -12s;
+  animation-duration: 28s;
 }
 
 /* Floating animation */

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react'
 import { translations, Language } from '../i18n/translations'
 
 interface LanguageContextValue {
@@ -29,8 +29,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(LANGUAGE_STORAGE_KEY, lang)
   }
 
-  // Translation function
-  const t = (key: string, params?: Record<string, string | number>): string => {
+  // Memoize translation function to prevent re-renders
+  const t = useCallback((key: string, params?: Record<string, string | number>): string => {
     const keys = key.split('.')
     let value: any = translations[language]
 
@@ -51,10 +51,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
 
     return value
-  }
+  }, [language])
+
+  // Memoize context value to prevent re-renders
+  const contextValue = useMemo(
+    () => ({ language, setLanguage, t }),
+    [language, setLanguage, t]
+  )
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   )
