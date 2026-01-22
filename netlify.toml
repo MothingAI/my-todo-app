@@ -10,6 +10,8 @@
   # 环境变量
   [build.environment]
     NODE_VERSION = "18"
+    NETLIFY_USE_YARN = "false"
+    NPM_FLAGS = "--legacy-peer-deps"
 
 # SPA 路由支持 - 所有路由指向 index.html
 [[redirects]]
@@ -47,3 +49,18 @@
 # 如需性能测试，可以手动使用 Chrome DevTools 的 Lighthouse
 # [[plugins]]
 #   package = "@netlify/plugin-lighthouse"
+
+# 构建缓存配置 - 禁用以确保每次都使用最新代码
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.images]
+  compress = true
