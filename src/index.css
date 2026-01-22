@@ -83,3 +83,45 @@ textarea:focus-visible {
   outline: 2px solid #667eea;
   outline-offset: 2px;
 }
+
+/* ==================== */
+/* Mobile Responsive Design */
+/* ==================== */
+
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+    padding-bottom: 80px; /* Space for fixed navigation */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+  }
+
+  main {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0.5rem;
+    padding-bottom: 80px;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  main {
+    padding: 0.75rem;
+  }
+}
