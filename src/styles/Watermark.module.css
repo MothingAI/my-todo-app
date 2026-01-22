@@ -13,6 +13,13 @@
   user-select: none;
   pointer-events: none;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.line {
+  line-height: 1.2;
 }
 
 @media (max-width: 600px) {
