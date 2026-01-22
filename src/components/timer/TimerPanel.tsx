@@ -63,7 +63,7 @@ export function TimerPanel() {
       {/* Timer Display */}
       {activeTodo && (
         <TimerDisplay
-          remainingTime={timer.getRemainingTime()}
+          remainingTime={timer.remainingTime}
           isActive={timer.isActive}
           isPaused={timer.isPaused}
           mode={timer.mode}

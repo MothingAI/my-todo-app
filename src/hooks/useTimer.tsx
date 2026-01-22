@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTodos } from './useTodos'
 
 export function useTimer(todoId?: string) {
   const { timer, dispatch } = useTodos()
   const intervalRef = useRef<number | null>(null)
+  const [remainingTime, setRemainingTime] = useState(0)
 
   const { activeSession, isPaused, pausedTime, mode } = timer
 
   // Calculate remaining time
-  const getRemainingTime = useCallback((): number => {
+  const calculateRemainingTime = useCallback((): number => {
     if (!activeSession) return 0
 
     if (isPaused) {
@@ -67,13 +68,13 @@ export function useTimer(todoId?: string) {
   const stopTimer = useCallback(() => {
     if (!activeSession) return
 
-    const duration = getRemainingTime()
+    const duration = remainingTime
     const actualDuration = activeSession.duration - duration
 
     dispatch({ type: 'STOP_TIMER', duration: Math.round(actualDuration / 1000 / 60) }) // Convert to minutes
-  }, [activeSession, getRemainingTime, dispatch])
+  }, [activeSession, remainingTime, dispatch])
 
-  // Auto-update timer every second when running
+  // Update remaining time every second when running
   useEffect(() => {
     if (!activeSession || isPaused) {
       if (intervalRef.current) {
@@ -83,8 +84,13 @@ export function useTimer(todoId?: string) {
       return
     }
 
+    // Initial update
+    setRemainingTime(calculateRemainingTime())
+
     intervalRef.current = window.setInterval(() => {
-      const remaining = getRemainingTime()
+      const remaining = calculateRemainingTime()
+      setRemainingTime(remaining)
+
       if (remaining <= 0) {
         // Timer completed
         stopTimer()
@@ -121,13 +127,20 @@ export function useTimer(todoId?: string) {
         intervalRef.current = null
       }
     }
-  }, [activeSession, isPaused, getRemainingTime, stopTimer])
+  }, [activeSession, isPaused, calculateRemainingTime, stopTimer])
+
+  // Update remaining time immediately when pause state changes
+  useEffect(() => {
+    if (activeSession && isPaused) {
+      setRemainingTime(calculateRemainingTime())
+    }
+  }, [isPaused, activeSession, calculateRemainingTime])
 
   return {
     activeSession,
     isPaused,
     mode,
-    getRemainingTime,
+    remainingTime,
     startPomodoro,
     startFreeTimer,
     pauseTimer,
