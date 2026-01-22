@@ -37,14 +37,17 @@ describe('todoStorage', () => {
       localStorage.setItem('todo-app-todos', JSON.stringify(mockTodos))
       const result = todoStorage.loadTodos()
 
-      // Data migration adds new fields (v3 schema)
+      // Data migration adds new fields (v4 schema)
       const expectedMigratedTodos = mockTodos.map((todo) => ({
         ...todo,
-        _version: 3,
+        _version: 4,
         actualMinutes: 0,
         priority: 'medium' as const,
         tags: [],
         subtasks: [],
+        completedAt: undefined,
+        dueDate: undefined,
+        estimatedMinutes: undefined,
       }))
 
       expect(result).toEqual(expectedMigratedTodos)

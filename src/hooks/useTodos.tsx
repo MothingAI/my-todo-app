@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, ReactNode, useEffect, useCallback } from 'react'
+import { createContext, useContext, useReducer, ReactNode, useEffect, useCallback, useRef } from 'react'
 import type { TodoState, TodoAction, TodoContextValue, Todo, Subtask } from '../types/todo'
 import { todoStorage } from '../utils/todoStorage'
 import { loadTimerSessions, saveTimerSessions } from '../utils/dataMigration'
@@ -40,6 +40,7 @@ function todoReducer(state: TodoState, action: TodoAction): TodoState {
       const completedTodo = {
         ...todoToComplete,
         completed: true,
+        completedAt: Date.now(), // Set completion timestamp
         subtasks: completedSubtasks,
       }
       return {
@@ -53,7 +54,7 @@ function todoReducer(state: TodoState, action: TodoAction): TodoState {
       const todoToActivate = state.completedTodos.find((t) => t.id === action.id)
       if (!todoToActivate) return state
 
-      const activeTodo = { ...todoToActivate, completed: false }
+      const activeTodo = { ...todoToActivate, completed: false, completedAt: undefined }
       return {
         ...state,
         completedTodos: state.completedTodos.filter((t) => t.id !== action.id),
@@ -385,18 +386,53 @@ export function TodoProvider({ children }: { children: ReactNode }) {
     }
   }, [dispatch])
 
-  // Save todos to localStorage whenever state changes
+  // Save todos to localStorage with debouncing (500ms)
+  const saveTimeoutRef = useRef<number | null>(null)
   useEffect(() => {
     const allTodos = [...state.activeTodos, ...state.completedTodos]
-    if (allTodos.length > 0) {
-      todoStorage.saveTodos(allTodos)
+
+    // Clear previous timeout
+    if (saveTimeoutRef.current !== null) {
+      clearTimeout(saveTimeoutRef.current)
+    }
+
+    // Set new timeout for debounced save
+    saveTimeoutRef.current = window.setTimeout(() => {
+      if (allTodos.length > 0 || todoStorage.loadTodos().length > 0) {
+        todoStorage.saveTodos(allTodos)
+      }
+      saveTimeoutRef.current = null
+    }, 500)
+
+    // Cleanup on unmount
+    return () => {
+      if (saveTimeoutRef.current !== null) {
+        clearTimeout(saveTimeoutRef.current)
+      }
     }
   }, [state.activeTodos, state.completedTodos])
 
-  // Save timer sessions whenever they change
+  // Save timer sessions whenever they change (also debounced)
+  const timerSaveTimeoutRef = useRef<number | null>(null)
   useEffect(() => {
-    if (state.timerSessions.length > 0) {
-      saveTimerSessions(state.timerSessions)
+    // Clear previous timeout
+    if (timerSaveTimeoutRef.current !== null) {
+      clearTimeout(timerSaveTimeoutRef.current)
+    }
+
+    // Set new timeout for debounced save
+    timerSaveTimeoutRef.current = window.setTimeout(() => {
+      if (state.timerSessions.length > 0 || loadTimerSessions().length > 0) {
+        saveTimerSessions(state.timerSessions)
+      }
+      timerSaveTimeoutRef.current = null
+    }, 500)
+
+    // Cleanup on unmount
+    return () => {
+      if (timerSaveTimeoutRef.current !== null) {
+        clearTimeout(timerSaveTimeoutRef.current)
+      }
     }
   }, [state.timerSessions])
 

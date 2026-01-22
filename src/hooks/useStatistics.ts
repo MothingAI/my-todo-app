@@ -37,7 +37,9 @@ export function useStatistics() {
       const dateStr = format(date, 'MMM d')
 
       const completedOnDay = completedTodos.filter((todo) => {
-        const completedDate = startOfDay(new Date(todo.createdAt))
+        // Use completedAt if available (schema v4+), fallback to createdAt for backward compatibility
+        const timestamp = todo.completedAt || todo.createdAt
+        const completedDate = startOfDay(new Date(timestamp))
         return differenceInDays(date, completedDate) === 0 && todo.completed
       })
 

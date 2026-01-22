@@ -1,5 +1,5 @@
 // Schema version for data migration
-export const TODO_SCHEMA_VERSION = 3
+export const TODO_SCHEMA_VERSION = 4
 
 // Image storage structure for subtasks
 export interface SubtaskImage {
@@ -30,6 +30,7 @@ export interface Todo {
   description: string
   completed: boolean
   createdAt: number
+  completedAt?: number // Timestamp when todo was marked as completed
   // New fields for time management (optional for backward compatibility)
   dueDate?: number
   estimatedMinutes?: number

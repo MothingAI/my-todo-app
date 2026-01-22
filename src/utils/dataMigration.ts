@@ -8,23 +8,34 @@ const TIMER_STORAGE_KEY = 'todo-app-timer-sessions'
  * v1: { id, description, completed, createdAt }
  * v2: adds { dueDate?, estimatedMinutes?, actualMinutes?, priority?, tags?, _version }
  * v3: adds { subtasks?, _version }
+ * v4: adds { completedAt?, _version }
  */
 export function migrateTodo(todo: any): Todo {
-  // If already at current version (v3), return as-is
+  // If already at current version (v4), return as-is
   if (todo._version === TODO_SCHEMA_VERSION) {
     return todo as Todo
   }
 
-  // Migrate from v2 to v3
+  // Migrate from v3 to v4
+  if (todo._version === 3) {
+    return {
+      ...todo,
+      completedAt: todo.completedAt,
+      _version: 4,
+    }
+  }
+
+  // Migrate from v2 to v3, then to v4
   if (todo._version === 2) {
     return {
       ...todo,
       subtasks: todo.subtasks || [],
-      _version: 3,
+      completedAt: undefined,
+      _version: 4,
     }
   }
 
-  // Migrate from v1 to v2, then to v3
+  // Migrate from v1 to v2, then to v3, then to v4
   return {
     id: todo.id,
     description: todo.description,
@@ -38,6 +49,8 @@ export function migrateTodo(todo: any): Todo {
     tags: todo.tags || [],
     // New fields with default values (v3)
     subtasks: [],
+    // New fields with default values (v4)
+    completedAt: undefined,
     _version: TODO_SCHEMA_VERSION,
   }
 }

@@ -21,6 +21,19 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    // Disable source maps in production for security
+    sourcemap: false,
+    // Optimize chunk splitting for better performance
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'charts': ['recharts'],
+          'utils': ['date-fns', 'canvas-confetti'],
+        },
+      },
+    },
+    // Warn about large chunks
+    chunkSizeWarningLimit: 500,
   },
 })

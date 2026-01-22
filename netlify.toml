@@ -26,6 +26,10 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # Content Security Policy - 限制资源来源，防止 XSS 攻击
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; media-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+    # Permissions Policy - 限制浏览器功能
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
 # 静态资源缓存
 [[headers]]
