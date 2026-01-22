@@ -41,7 +41,6 @@ export const TodoItemWithMeta = memo(function TodoItemWithMeta({
 }: TodoItemWithMetaProps) {
   const { dispatch } = useTodos()
   const { trigger } = useConfetti()
-  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const handleToggle = () => {
@@ -69,13 +68,11 @@ export const TodoItemWithMeta = memo(function TodoItemWithMeta({
   }
 
   const handleItemClick = () => {
-    setSelectedTodo(todo)
     setIsDrawerOpen(true)
   }
 
   const handleDrawerClose = () => {
     setIsDrawerOpen(false)
-    setSelectedTodo(null)
   }
 
   const overdue = isOverdue(todo)
@@ -153,7 +150,7 @@ export const TodoItemWithMeta = memo(function TodoItemWithMeta({
       </li>
 
       <TodoDetailDrawer
-        todo={selectedTodo}
+        todo={isDrawerOpen ? todo : null}
         isOpen={isDrawerOpen}
         onClose={handleDrawerClose}
       />
